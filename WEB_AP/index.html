@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freshambo – Premium Mangoes | Farm Direct</title>
+  <meta name="description"
+    content="Buy the finest handpicked mangoes — Alphonso, Kesar, Dasheri and more. Direct from organic farms. Order online at Freshambo.">
+  <link rel="stylesheet" href="mm.css">
+</head>
+
+<body>
+
+  <div id="navbarRoot"></div>
+
+  <!-- Hero Slider -->
+  <section class="image-slider">
+    <div class="slider-container" id="sliderContainer">
+      <div class="slide active">
+        <img src="assets/slider1.png" alt="Mango Orchard" onerror="this.onerror=null;this.src='assets/mango_card.png'">
+        <div class="slider-overlay">
+          <h1>Freshambo🥭</h1>
+          <p>Experience the Purest Taste of Sweetness &amp; Finest Mangoes</p>
+          <button class="btn-primary" onclick="scrollSmooth('salesGrid')">Explore Batches</button>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="assets/slider2.png" alt="Mango Harvest" onerror="this.onerror=null;this.src='assets/mango_card.png'">
+        <div class="slider-overlay">
+          <h1>Pure🥭Freshness</h1>
+          <p>Handpicked, Chemical-Free, Farm-Fresh, Delivered Straight to Your Home</p>
+          <button class="btn-primary" onclick="scrollSmooth('salesGrid')">Pre-order Now</button>
+        </div>
+      </div>
+      </div>
+    </div>
+    <button class="slider-nav-btn prev" onclick="prevSlide()" style="position:absolute;top:50%;left:20px;transform:translateY(-50%);background:rgba(255,255,255,0.3);color:white;border:none;width:50px;height:50px;cursor:pointer;border-radius:50%;font-size:24px;display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.6)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'">&#10094;</button>
+    <button class="slider-nav-btn next" onclick="nextSlide()" style="position:absolute;top:50%;right:20px;transform:translateY(-50%);background:rgba(255,255,255,0.3);color:white;border:none;width:50px;height:50px;cursor:pointer;border-radius:50%;font-size:24px;display:flex;align-items:center;justify-content:center;transition:background 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.6)'" onmouseout="this.style.background='rgba(255,255,255,0.3)'">&#10095;</button>
+    <div class="slider-dots" id="sliderDots" style="position:relative;z-index:2"></div>
+  </section>
+
+  <!-- Marquee -->
+  <div class="marquee-ticker">
+    <div class="marquee-content">⭐️Freshambo Mango Season 2026 is LIVE! ⭐ Handpicked Organic Mangoes. ⭐ Zero Chemicals,
+      100% Purity. ⭐ Directly Sourced from Alirajpur Farmers. ⭐️ Book Now &amp; Save 10%. ⭐️ Freshness Delivered</div>
+  </div>
+
+  <main class="container">
+    <div class="main-panel">
+
+      <!-- Search -->
+      <div class="search-header">
+        <div class="search-bar-container">
+          <input type="text" id="searchInput" placeholder="Search by mango variety, farm, or region...">
+          <button class="search-btn" onclick="filterMangos()">
+            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+          </button>
+        </div>
+        <div class="filter-bar">
+          <button class="filter-drop">Price <span class="caret">▼</span></button>
+          <button class="filter-drop">Variety <span class="caret">▼</span></button>
+          <button class="filter-drop">More <span class="caret">▼</span></button>
+          <button class="filter-drop" style="margin-left:auto">Save Search</button>
+        </div>
+      </div>
+
+      <!-- Sale Mangos -->
+      <div class="listings-header" id="salesGrid">
+        <h1>Explore Mango Varieties</h1>
+        <p>Pure Sweetness from the Farms — Order Now</p>
+      </div>
+      <div class="card-grid" id="salesGridCards"></div>
+
+      <!-- Kachcha -->
+      <div class="listings-header">
+        <h1>Green (Kacche) Mangoes Selection</h1>
+        <p>Fresh Pure &amp; Natural Green Mangoes for Pickle (Achar) and Chutneys</p>
+      </div>
+      <div class="card-grid" id="kachchaGridCards"></div>
+
+      <!-- Rent -->
+      <div class="listings-header">
+        <h1>Freshambo Trees Booking</h1>
+        <p>Enjoy farm-fresh mangoes by renting a tree for the entire season</p>
+      </div>
+      <div class="card-grid" id="rentGridCards"></div>
+
+      <!-- About -->
+      <section id="aboutSection" class="about-freshambo">
+        <div class="about-header">
+          <h2>Why Trust Freshambo?</h2>
+          <p>Building a legacy of quality and transparency across India's finest orchards.</p>
+        </div>
+      </section>
+
+      <!-- Map -->
+      <section id="mapSection" class="map-card-section">
+        <div class="map-card">
+          <div class="map-card-info">
+            <h2>Explore Our Orchards</h2>
+            <p>Discover the exact location of our premium mango varieties across India.</p>
+          </div>
+          <div class="map-image-container">
+            <img src="assets/india_map.png" alt="Mango Region Map" onerror="this.src='assets/mango_card.png'">
+          </div>
+        </div>
+      </section>
+
+      <!-- Feedback -->
+      <section class="feedback-section" id="feedbackSection">
+        <div class="feedback-header">
+          <h2>Customer Feedback</h2>
+          <p>Real stories from our mango lovers across the country.</p>
+        </div>
+        <div class="feedback-grid">
+          <div class="feedback-card">
+            <div class="feedback-stars">⭐⭐⭐⭐⭐</div>
+            <p class="feedback-text">"The best Alphonsos I've ever had. Truly fresh and completely fiberless. My kids
+              love it!"</p>
+            <div class="feedback-user">
+              <div class="user-avatar" style="background:#ff9100">RS</div>
+              <div class="user-info"><strong>Rahul Sharma</strong><span>Mumbai, Maharashtra</span></div>
+            </div>
+          </div>
+          <div class="feedback-card">
+            <div class="feedback-stars">⭐⭐⭐⭐⭐</div>
+            <p class="feedback-text">"Rented a Kesar tree last season. It was such a great experience harvesting our own
+              fruit with the family."</p>
+            <div class="feedback-user">
+              <div class="user-avatar" style="background:#006aff">AP</div>
+              <div class="user-info"><strong>Anjali Patel</strong><span>Ahmedabad, Gujarat</span></div>
+            </div>
+          </div>
+          <div class="feedback-card">
+            <div class="feedback-stars">⭐⭐⭐⭐⭐</div>
+            <p class="feedback-text">"Outstanding service! Freshambo delivers exactly what they promise—pure, authentic
+              taste every time."</p>
+            <div class="feedback-user">
+              <div class="user-avatar" style="background:#2ecc71">KV</div>
+              <div class="user-info"><strong>Kiran Verma</strong><span>Delhi, NCR</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:center;padding-top:40px">
+          <button class="btn-outline" id="writeReviewBtn" onclick="toggleReviewForm()"
+            style="padding:12px 30px;border-radius:10px">✍️ Write a Review</button>
+          <div id="reviewFormBox" style="display:none;margin-top:24px">
+            <div class="review-form-card">
+              <h3>Share Your Mango Experience</h3>
+              <form id="reviewForm" onsubmit="submitReview(event)">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>Full Name</label>
+                    <input name="reviewerName" type="text" placeholder="Your Name" required>
+                  </div>
+                  <div class="form-group">
+                    <label>Star Rating</label>
+                    <select name="reviewerRating">
+                      <option>⭐⭐⭐⭐⭐ (Excellent)</option>
+                      <option>⭐⭐⭐⭐ (Good)</option>
+                      <option>⭐⭐⭐ (Average)</option>
+                      <option>⭐⭐ (Poor)</option>
+                      <option>⭐ (Terrible)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Your Feedback</label>
+                  <textarea name="reviewerText" rows="3" placeholder="Tell us what you loved..." required></textarea>
+                </div>
+                <button type="submit" class="btn-primary" id="reviewSubmitBtn"
+                  style="width:100%;border-radius:8px;padding:12px">Submit Review</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Enquiry -->
+      <section class="enquiry-section" id="enquirySection">
+        <div class="enquiry-container">
+          <div class="enquiry-info">
+            <h2>Place an Order Enquiry</h2>
+            <p>Fill out the details to request a purchase quote or tree rental.</p>
+            <div class="contact-methods">
+              <div class="contact-method"><span>📦</span>
+                <div><strong>Bulk Orders</strong>
+                  <p>Available for 50kg+</p>
+                </div>
+              </div>
+              <div class="contact-method"><span>🌳</span>
+                <div><strong>Rentals</strong>
+                  <p>Full Season Booking</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="enquiry-card">
+            <form id="enquiryForm" onsubmit="submitEnquiry(event)">
+              <div class="form-row">
+                <div class="form-group"><label for="eq-name">Full Name</label><input name="name" type="text"
+                    id="eq-name" placeholder="Your Name" required></div>
+                <div class="form-group"><label for="eq-phone">Phone Number</label><input name="phone" type="tel"
+                    id="eq-phone" placeholder="+91 00000 00000" required></div>
+              </div>
+              <div class="form-group"><label for="eq-email">Email Address</label><input name="email" type="email"
+                  id="eq-email" placeholder="email@example.com"></div>
+              <div class="form-group">
+                <label for="eq-type">Order Type</label>
+                <select name="orderType" id="eq-type">
+                  <option value="individual">Individual Purchase (Box)</option>
+                  <option value="bulk">Wholesale / Bulk (50kg+)</option>
+                  <option value="rental">Tree Rental (Full Season)</option>
+                  <option value="gift">Corporate Gifting</option>
+                </select>
+              </div>
+              <div class="form-group"><label for="eq-msg">Order Details / Quantity</label><textarea name="message"
+                  id="eq-msg" rows="3"
+                  placeholder="Specify varieties and quantity (e.g., 5 doz Alphonso, 2 Kesar Trees)..."></textarea>
+              </div>
+              <button type="submit" class="btn-primary"
+                style="width:100%;padding:14px;font-size:16px;border-radius:10px">📜 Submit Order Enquiry</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div id="cartRoot"></div>
+  <div id="footerRoot"></div>
+
+  <script type="module" src="mm.js"></script>
+  <script type="module">
+    import './mm.js';
+
+    // Render layout
+    document.getElementById('navbarRoot').innerHTML = buildNavbar('home');
+    document.getElementById('cartRoot').innerHTML = buildCartDrawer();
+    document.getElementById('footerRoot').innerHTML = buildFooter();
+
+    // Init hero slider
+    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('sliderDots');
+    slides.forEach((_, i) => {
+      const d = document.createElement('span');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.onclick = () => goSlide(i);
+      dotsContainer.appendChild(d);
+    });
+    function goSlide(idx) {
+      slides[current].classList.remove('active');
+      document.querySelectorAll('.dot')[current].classList.remove('active');
+      current = idx;
+      slides[current].classList.add('active');
+      document.querySelectorAll('.dot')[current].classList.add('active');
+    }
+    
+    window.prevSlide = function() {
+      goSlide((current - 1 + slides.length) % slides.length);
+    };
+    window.nextSlide = function() {
+      goSlide((current + 1) % slides.length);
+    };
+
+    let slideInterval = setInterval(() => goSlide((current + 1) % slides.length), 5000);
+    // Optional: reset timer on manual navigation
+    function resetTimer() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(() => goSlide((current + 1) % slides.length), 5000);
+    }
+    // wrap goSlide to include resetTimer if we wanted, but not strictly needed unless user wants pause on interaction.
+
+    // Render cards
+    function renderCards(query = '') {
+      const q = query.toLowerCase().trim();
+      const filtered = q ? mangos.filter(m =>
+        m.variety.toLowerCase().includes(q) ||
+        m.farm.toLowerCase().includes(q) ||
+        m.location.toLowerCase().includes(q) ||
+        (m.certification || '').toLowerCase().includes(q)
+      ) : mangos;
+
+      const sales = filtered.filter(m => m.type === 'sale' && !m.variety.toLowerCase().includes('kachcha'));
+      const kachcha = filtered.filter(m => m.type === 'sale' && m.variety.toLowerCase().includes('kachcha'));
+      const rent = filtered.filter(m => m.type === 'rent');
+
+      document.getElementById('salesGridCards').innerHTML = sales.map(mangoCardHTML).join('');
+      document.getElementById('kachchaGridCards').innerHTML = kachcha.map(mangoCardHTML).join('');
+      document.getElementById('rentGridCards').innerHTML = rent.map(mangoCardHTML).join('');
+    }
+    renderCards();
+    document.getElementById('searchInput').addEventListener('input', e => renderCards(e.target.value));
+
+    // Review form
+    window.toggleReviewForm = function () {
+      const box = document.getElementById('reviewFormBox');
+      box.style.display = box.style.display === 'none' ? 'block' : 'none';
+    };
+    window.submitReview = async function (e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = fd.get('reviewerName').trim();
+      const rating = fd.get('reviewerRating');
+      const text = fd.get('reviewerText').trim();
+      if (!name || !text) return;
+      const btn = document.getElementById('reviewSubmitBtn');
+      btn.textContent = 'Submitting...'; btn.disabled = true;
+      try {
+        await saveToFirestore('feedback', { name, rating, text, source: 'html-home' });
+        alert('✅ Thank you! Your feedback was submitted.');
+      } catch (err) {
+        alert('Thank you! (Note: Enable Firestore in Firebase Console to save data)');
+      }
+      btn.textContent = 'Submit Review'; btn.disabled = false;
+      e.target.reset();
+      document.getElementById('reviewFormBox').style.display = 'none';
+    };
+
+    // Enquiry form
+    window.submitEnquiry = async function (e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = fd.get('name').trim();
+      const phone = fd.get('phone').trim();
+      const email = fd.get('email').trim();
+      const orderType = fd.get('orderType').trim();
+      const message = fd.get('message').trim();
+      if (!name || !phone) { alert('⚠️ Please fill in your Name and Phone number.'); return; }
+      const waText = `Hi Freshambo,\nI would like to place an order enquiry.\n\nName: ${name}\nPhone: ${phone}\nEmail: ${email || '-'}\nOrder Type: ${orderType}\nDetails: ${message || '-'}\n`;
+      try { await saveToFirestore('enquiries', { name, phone, email, orderType, message, source: 'html-home' }); }
+      catch (err) { console.warn(err); }
+      openWhatsApp(waText);
+      alert('✅ Order enquiry sent on WhatsApp. Thanks!');
+      e.target.reset();
+    };
+
+    window.filterMangos = function () {
+      renderCards(document.getElementById('searchInput').value);
+    };
+  </script>
+</body>
+
+</html>

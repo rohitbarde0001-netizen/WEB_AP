@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mango Details – Freshambo</title>
+  <link rel="stylesheet" href="mm.css">
+  <style>
+    .dp-hero {
+      position: relative;
+      width: 100%;
+      height: 500px;
+    }
+
+    .dp-hero img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .dp-back-btn {
+      position: absolute;
+      top: 20px;
+      left: max(20px, calc((100vw - 1200px) / 2 + 20px));
+      z-index: 10;
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 10px 20px;
+      border-radius: 30px;
+      backdrop-filter: blur(4px);
+      transition: 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .dp-back-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+      border-color: white;
+    }
+
+    .detail-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      z-index: 0;
+    }
+
+    .detail-slide.active {
+      opacity: 1;
+    }
+
+    .detail-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .dp-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
+    }
+
+    .dp-hero-text {
+      position: absolute;
+      bottom: 40px;
+      left: max(20px, calc((100vw - 1200px) / 2 + 20px));
+      color: white;
+    }
+
+    .dp-cert-badge {
+      display: inline-block;
+      background: var(--secondary);
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .dp-hero-title {
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      margin-bottom: 4px;
+      line-height: 1.1;
+    }
+
+    .dp-hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      opacity: 0.9;
+    }
+
+    .dp-grid {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .dp-left {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .dp-section {
+      background: white;
+      border-radius: 12px;
+    }
+
+    .dp-price-row {
+      margin-bottom: 24px;
+      display: flex;
+      align-items: baseline;
+    }
+
+    .dp-price {
+      font-size: 40px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .dp-unit {
+      font-size: 16px;
+      color: var(--text-light);
+      margin-left: 8px;
+    }
+
+    .dp-cta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .dp-cta button {
+      flex: 1;
+      padding: 16px;
+      font-size: 18px;
+      border-radius: 8px;
+      font-weight: 700;
+    }
+
+    @media(max-width: 500px) {
+      .dp-cta {
+        flex-direction: column;
+      }
+    }
+
+    .freight-row {
+      padding: 16px;
+      background: #f8f9fa;
+      border-radius: 8px;
+      font-size: 14px;
+      color: var(--text-dark);
+      border-left: 4px solid var(--primary);
+    }
+
+    .dp-section-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dp-section-title span {
+      font-size: 26px;
+    }
+
+    .dp-specs {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 16px;
+    }
+
+    .dp-spec-card {
+      background: #f8f9fa;
+      padding: 20px 16px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .dp-spec-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .dp-spec-lbl {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    .dp-spec-val {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--text-dark);
+    }
+
+    .dp-desc {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-dark);
+    }
+
+    .dp-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .dp-hl-item {
+      background: white;
+      border: 1px solid #e2e8f0;
+      color: var(--text-dark);
+      padding: 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .dp-hl-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      border-color: #4ade80;
+    }
+
+    .dp-hl-item .icon {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      color: white;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 24px;
+      box-shadow: 0 4px 10px rgba(34, 197, 94, 0.3);
+      flex-shrink: 0;
+    }
+
+    .contact-form {
+      background: #f9f9f9;
+      padding: 30px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 16px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 15px;
+    }
+
+    .btn-send {
+      width: 100%;
+      padding: 16px;
+      background: #2a2b2c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-send:hover {
+      background: var(--primary);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="navbarRoot"></div>
+
+  <div id="productDetailRegion">
+    <!-- Injected by JS -->
+  </div>
+
+  <div id="cartRoot"></div>
+  <div id="footerRoot"></div>
+
+  <script type="module">
+    import './mm.js';
+
+    document.getElementById('navbarRoot').innerHTML = buildNavbar('home');
+    document.getElementById('cartRoot').innerHTML = buildCartDrawer();
+    document.getElementById('footerRoot').innerHTML = buildFooter();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = parseInt(urlParams.get('id'));
+    const item = mangos.find(m => m.id === id);
+
+    if (!item) {
+      document.getElementById('productDetailRegion').innerHTML = '<h2 style="text-align:center; padding: 100px;">Mango not found. <a href="index.html">Go Back</a></h2>';
+    } else {
+      const images = [
+        item.img,
+        'assets/lush_mango_orchard_1774281849618.png',
+        'assets/slider2.png'
+      ];
+
+      const slidesHTML = images.map((img, i) => `
+        <div class="detail-slide ${i === 0 ? 'active' : ''}">
+          <img src="${img}" alt="${item.variety} View ${i + 1}" onerror="this.onerror=null;this.src='assets/mango_card.png'">
+        </div>
+      `).join('');
+
+      document.getElementById('productDetailRegion').innerHTML = `
+        <div class="dp-hero">
+            <a href="index.html" class="dp-back-btn">← Back to Home</a>
+            ${slidesHTML}
+            <div class="dp-hero-overlay"></div>
+            <div class="dp-hero-text">
+                <div class="dp-cert-badge">${item.certification || 'Verified Quality'}</div>
+                <div class="dp-hero-title">${item.variety} Mangos</div>
+                <div class="dp-hero-sub">From ${item.farm}, ${item.location}</div>
+            </div>
+        </div>
+
+        <div class="dp-grid">
+            <div class="dp-left">
+
+                <div class="dp-section">
+                    <div class="dp-price-row">
+                        <span class="dp-price">${item.price}</span>
+                        <span class="dp-unit">(${item.unit})</span>
+                    </div>
+
+                    <div class="dp-cta">
+                        <button class="btn-primary" onclick="addToDetailCart(${item.id})">🛒 Add to Cart</button>
+                        <button class="btn-outline" onclick="document.getElementById('contactForm').scrollIntoView({behavior:'smooth'})">📞 Contact Farm</button>
+                    </div>
+
+                    <div class="freight-row">
+                        🚚 <span><strong>Free delivery</strong> on orders above ₹800 · Ships within 48 hrs</span>
+                    </div>
+                </div>
+
+                <div class="dp-section">
+                    <div class="dp-section-title"><span>📦</span> Specifications</div>
+                    <div class="dp-specs">
+                        <div class="dp-spec-card">
+                            <div class="dp-spec-icon">⚖️</div>
+                            <div class="dp-spec-lbl">Weight</div>
+                            <div class="dp-spec-val">${item.weight || item.unit}</div>
+                        </div>
+                        <div class="dp-spec-card">
+                            <div class="dp-spec-icon">⭐</div>
+                            <div class="dp-spec-lbl">Rating</div>
+                            <div class="dp-spec-val">${item.rating}</div>
+                        </div>
+                        <div class="dp-spec-card">
+                            <div class="dp-spec-icon">🍬</div>
+                            <div class="dp-spec-lbl">Sweetness</div>
+                            <div class="dp-spec-val">${item.sweetness}</div>
+                        </div>
+                        <div class="dp-spec-card">
+                            <div class="dp-spec-icon">🌿</div>
+                            <div class="dp-spec-lbl">Fiber</div>
+                            <div class="dp-spec-val">${item.fiber}</div>
+                        </div>
+                        <div class="dp-spec-card">
+                            <div class="dp-spec-icon">📍</div>
+                            <div class="dp-spec-lbl">Region</div>
+                            <div class="dp-spec-val">${item.location.split(',')[0]}</div>
+                        </div>
+                        <div class="dp-spec-card">
+                            <div class="dp-spec-icon">🗓️</div>
+                            <div class="dp-spec-lbl">Season</div>
+                            <div class="dp-spec-val">2026</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dp-section">
+                    <div class="dp-section-title"><span>📖</span> About this Variety</div>
+                    <p class="dp-desc">${item.desc}</p>
+                </div>
+
+                <div class="dp-section">
+                    <div class="dp-section-title"><span>✅</span> Why Choose This Mango?</div>
+                    <div class="dp-highlights">
+                        <div class="dp-hl-item"><span class="icon">🌱</span> Farm Fresh, No Cold Storage</div>
+                        <div class="dp-hl-item"><span class="icon">🔬</span> Lab Tested for Quality</div>
+                        <div class="dp-hl-item"><span class="icon">📦</span> Export-Grade Packaging</div>
+                        <div class="dp-hl-item"><span class="icon">🌍</span> Delivered Pan-India</div>
+                        <div class="dp-hl-item"><span class="icon">💯</span> 100% Satisfaction Guarantee</div>
+                        <div class="dp-hl-item"><span class="icon">♻️</span> Eco-Friendly Boxes</div>
+                    </div>
+                </div>
+
+                <div class="dp-section" id="contactForm">
+                    <div class="dp-section-title"><span>✉️</span> Send an Enquiry</div>
+                    <div class="contact-form">
+                        <form onsubmit="submitDetailEnquiry(event, '${item.variety}')">
+                            <input type="text" name="name" placeholder="Your Full Name" required>
+                            <input type="tel" name="phone" placeholder="Phone / WhatsApp Number" required>
+                            <input type="email" name="email" placeholder="Email Address">
+                            <select name="qty">
+                                <option value="">Select Quantity</option>
+                                <option>1 Box</option>
+                                <option>5 Boxes</option>
+                                <option>10 Boxes</option>
+                                <option>Bulk (50+ Boxes)</option>
+                            </select>
+                            <textarea name="message" rows="3" placeholder="Your message or special requirements…" required></textarea>
+                            <button type="submit" class="btn-send">📤 Send Enquiry to Farm</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+      `;
+
+      // Assign global submit enquiry
+      window.submitDetailEnquiry = function (e, variety) {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const name = fd.get('name').trim();
+        const phone = fd.get('phone').trim();
+        const amt = fd.get('qty') || 'Not specified';
+        const msg = fd.get('message').trim();
+
+        const waText = `Hi Freshambo,\nI have an enquiry regarding ${variety} Mangos.\n\nName: ${name}\nPhone: ${phone}\nQuantity: ${amt}\nQuery: ${msg}\n`;
+        openWhatsApp(waText);
+        alert('✅ Enquiry redirected to WhatsApp. Thanks!');
+        e.target.reset();
+      };
+
+      // Assign addToCart wrapper globally for the button
+      window.addToDetailCart = function (mangoId) {
+        const mango = mangos.find(m => m.id === mangoId);
+        if (mango) addToCart(mango);
+      };
+
+      // Auto Slider Logic for Hero image
+      let currentSlide = 0;
+      const detailSlides = document.querySelectorAll('.detail-slide');
+
+      if (detailSlides.length > 1) {
+        setInterval(() => {
+          detailSlides[currentSlide].classList.remove('active');
+          currentSlide = (currentSlide + 1) % detailSlides.length;
+          detailSlides[currentSlide].classList.add('active');
+        }, 3000);
+      }
+    }
+  </script>
+</body>
+
+</html>
