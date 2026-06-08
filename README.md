@@ -1,1 +1,1 @@
-A fully responsive e-commerce web application featuring product listings and cart functionality.
+A fully responsive E-commerce web application featuring product listings and cart functionality.
